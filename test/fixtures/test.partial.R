@@ -1,9 +1,9 @@
 options( digits = 16 )
 library( jsonlite )
 
-m = 1
-n = 1
-k = 1
+m = 6
+n = 5
+k = 3
 x = c( -5, -2.5, 0, 2.5, 5 )
 y = phyper( x, m, n, k )
 

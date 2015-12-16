@@ -1,10 +1,10 @@
 options( digits = 16 )
 library( jsonlite )
 
-m = 1
-n = 1
-k = 1
-x = c( -5, -2.5, 0, 2.5, 5 )
+m = 12
+n = 12
+k = 6
+x = c( -5, -2.5, 0, 2.5, 5, 8, 12 )
 y = phyper( x, m, n, k )
 
 cat( y, sep = ",\n" )

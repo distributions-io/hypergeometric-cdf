@@ -48,7 +48,7 @@ describe( 'accessor cdf', function tests() {
 
 		for ( i = 0; i < actual.length; i++ ) {
 			if ( isFiniteNumber( actual[ i ] ) && isFiniteNumber( expected[ i ] ) ) {
-				assert.closeTo( actual[ i ], expected[ i ], 1e-14 );
+				assert.closeTo( actual[ i ], expected[ i ], 1e-12 );
 			}
 		}
 
