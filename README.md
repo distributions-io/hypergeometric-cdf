@@ -2,12 +2,12 @@ Cumulative Distribution Function
 ===
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][codecov-image]][codecov-url] [![Dependencies][dependencies-image]][dependencies-url]
 
-> [hypergeometric](https://en.wikipedia.org/wiki/hypergeometric_distribution) distribution [cumulative distribution function](https://en.wikipedia.org/wiki/Cumulative_distribution_function).
+> [Hypergeometric](https://en.wikipedia.org/wiki/hypergeometric_distribution) distribution [cumulative distribution function](https://en.wikipedia.org/wiki/Cumulative_distribution_function).
 
-The [cumulative distribution function](https://en.wikipedia.org/wiki/Cumulative_distribution_function) for a [hypergeometric](https://en.wikipedia.org/wiki/hypergeometric_distribution) random variable is
+Imagine a scenario with an urn holding black and white balls. Let `m` be the number of white balls in the urn and `n` be the number of black balls. We draw `k` balls from the urn. Defining the random variable `X` as the number of white balls drawn in total, `X` is said to follow a [hypergeometric distribution](https://en.wikipedia.org/wiki/Hypergeometric_distribution). The [cumulative distribution function](https://en.wikipedia.org/wiki/Cumulative_distribution_function) for a [hypergeometric](https://en.wikipedia.org/wiki/hypergeometric_distribution) random variable is
 
-<div class="equation" align="center" data-raw-text="" data-equation="eq:cdf">
-	<img src="" alt="Cumulative distribution function for a hypergeometric distribution.">
+<div class="equation" align="center" data-raw-text="F(x;m,n,k) =\sum_{i=0}^{\lfloor x \rfloor} \frac{{m \choose i}{n \choose k-i}}{{m+n \choose k}}" data-equation="eq:cdf">
+	<img src="https://cdn.rawgit.com/distributions-io/hypergeometric-cdf/6abed696e201c095d709dd40d55f5fce09585ece/docs/img/eqn.svg" alt="Cumulative distribution function for a hypergeometric distribution.">
 	<br>
 </div>
 
@@ -40,15 +40,15 @@ var matrix = require( 'dstructs-matrix' ),
 	i;
 
 out = cdf( 1 );
-// returns
+// returns 1
 
 x = [ -4, -2, 0, 2, 4 ];
 out = cdf( x );
-// returns [...]
+// returns [ 0, 0, 0.5, 1, 1 ]
 
 x = new Float32Array( x );
 out = cdf( x );
-// returns Float64Array( [...] )
+// returns Float64Array( [0,0,0.5,1,1] )
 
 x = new Float32Array( 6 );
 for ( i = 0; i < 6; i++ ) {
@@ -63,10 +63,11 @@ mat = matrix( x, [3,2], 'float32' );
 
 out = cdf( mat );
 /*
-	[
-
-	   ]
+	[ 0 0
+	  0 0.5
+	  1 1 ]
 */
+
 ```
 
 The function accepts the following `options`:
@@ -83,14 +84,15 @@ The function accepts the following `options`:
 A [hypergeometric](https://en.wikipedia.org/wiki/hypergeometric_distribution) distribution is a function of 3 parameter(s): `m`(number of white balls in urn) and `n`(number of black balls in urn) and `k`(number of draws). By default, `m` is equal to `1` and `n` is equal to `1` and `k` is equal to `1`. To adjust either parameter, set the corresponding option(s).
 
 ``` javascript
-var x = [ -4, -2, 0, 2, 4 ];
+var x = [ -4, -2, 0, 2, 4, 8, 10 ];
 
 var out = cdf( x, {
-	'm': 2,
+	'm': 20,
 	'n': 8,
 	'k': 10
 });
-// returns [...]
+// returns [ 0, 0, 0, 0, ~0.011, ~0.884, 1 ]
+
 ```
 
 For non-numeric `arrays`, provide an accessor `function` for accessing `array` values.
@@ -111,7 +113,8 @@ function getValue( d, i ) {
 var out = cdf( data, {
 	'accessor': getValue
 });
-// returns [...]
+// returns [ 0, 0, 0.5, 1, 1 ]
+
 ```
 
 
@@ -132,11 +135,11 @@ var out = cdf( data, {
 });
 /*
 	[
-		{'x':[0,]},
-		{'x':[1,]},
-		{'x':[2,]},
-		{'x':[3,]},
-		{'x':[4,]},
+		{'x':[0,0]},
+		{'x':[1,0]},
+		{'x':[2,0.5]},
+		{'x':[3,1]},
+		{'x':[4,1]},
 	]
 */
 
@@ -154,13 +157,14 @@ x = new Float64Array( [-4,-2,0,2,4] );
 out = cdf( x, {
 	'dtype': 'float32'
 });
-// returns Float32Array( [...] )
+// returns Float32Array( [0,0,0.5,1,1] )
 
 // Works for plain arrays, as well...
 out = cdf( [-4,-2,0,2,4], {
 	'dtype': 'float32'
 });
-// returns Float32Array( [...] )
+// returns Float32Array( [0,0,0.5,1,1] )
+
 ```
 
 By default, the function returns a new data structure. To mutate the input data structure (e.g., when input values can be discarded or when optimizing memory usage), set the `copy` option to `false`.
@@ -177,7 +181,7 @@ x = [ -4, -2, 0, 2, 4 ];
 out = cdf( x, {
 	'copy': false
 });
-// returns [...]
+// returns [ 0, 0, 0.5, 1, 1 ]
 
 bool = ( x === out );
 // returns true
@@ -197,9 +201,9 @@ out = cdf( mat, {
 	'copy': false
 });
 /*
-	[
-
-	   ]
+	[ 0 0
+	  0 0.5
+	  1 1 ]
 */
 
 bool = ( mat === out );
