@@ -11,7 +11,7 @@ Imagine a scenario with an urn holding black and white balls. Let `m` be the num
 	<br>
 </div>
 
-where `m` is the number of white balls in urn and `n` is the number of black balls in urn and `k` is the number of draws.
+where `m` is the number of white balls in the urn, `n` is the number of black balls in the urn and `k` is the number of draws.
 
 ## Installation
 
@@ -370,7 +370,7 @@ Copyright &copy; 2015. The [Compute.io](https://github.com/compute-io) Authors.
 [travis-image]: http://img.shields.io/travis/distributions-io/hypergeometric-cdf/master.svg
 [travis-url]: https://travis-ci.org/distributions-io/hypergeometric-cdf
 
-[codecov-image]: https://img.shields.io/codecov/github/distributions-io/hypergeometric-cdf/master.svg
+[codecov-image]: https://img.shields.io/codecov/c/github/distributions-io/hypergeometric-cdf/master.svg
 [codecov-url]: https://codecov.io/github/distributions-io/hypergeometric-cdf?branch=master
 
 [dependencies-image]: http://img.shields.io/david/distributions-io/hypergeometric-cdf.svg
